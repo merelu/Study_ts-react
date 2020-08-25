@@ -1,0 +1,37 @@
+import React, { useReducer } from "react";
+
+type Action = { type: "INCREASE" } | { type: "DECREASE" };
+//이렇게 액션을 | 으로 연달아서 쭉나열한다.
+
+function reducer(state: number, action: Action): number {
+  switch (action.type) {
+    case "INCREASE":
+      return state + 1;
+    case "DECREASE":
+      return state - 1;
+    default:
+      throw new Error("Unhandled action");
+  }
+}
+
+function Counter_useReducer() {
+  const [count, dispatch] = useReducer(reducer, 0);
+  const onIncrease = () => {
+    dispatch({ type: "INCREASE" });
+  };
+  const onDecrease = () => {
+    dispatch({ type: "DECREASE" });
+  };
+
+  return (
+    <div>
+      <h1>{count}</h1>
+      <div>
+        <button onClick={onIncrease}>+</button>
+        <button onClick={onDecrease}>-</button>
+      </div>
+    </div>
+  );
+}
+
+export default Counter_useReducer;
